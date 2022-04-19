@@ -1,9 +1,6 @@
-# OmniAuth::Gorgias::Oauth2
-Gorgias OAuth2 Strategy for OmniAuth
+# Gorgias OmniAuth
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/omniauth/gorgias/oauth2`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+[Gorgias](https://gorgias.com) OAuth2 Strategy for [OmniAuth](https://github.com/omniauth/omniauth)
 
 ## Installation
 
@@ -23,17 +20,23 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+`OmniAuth::Strategies::Gorgias` is simply a Rack middleware. Read [the OmniAuth docs](https://github.com/omniauth/omniauth) for detailed instructions.
 
-## Development
+Here's a quick example, adding the middleware to a Rails app initializer :
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+```ruby
+Rails.application.config.middleware.use OmniAuth::Builder do
+  provider :gorgias,
+           ENV['GORGIAS_CLIENT_ID'],
+           ENV['GORGIAS_CLIENT_SECRET'],
+           callback_path: '/auth/gorgias/callback',
+           scope: 'openid email profile offline write:all'
+end
+```
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/azemoh/omniauth-gorgias-oauth2.
+Bug reports and pull requests are welcome on GitHub at https://github.com/feracommerce/omniauth-gorgias-oauth2.
 
 ## License
 

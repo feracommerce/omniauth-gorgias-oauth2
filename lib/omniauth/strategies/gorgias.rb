@@ -53,7 +53,7 @@ module OmniAuth
       end
 
       def account_present?
-        !!(account =~ /\A[a-z0-9]+\z/i)
+        !!(account =~ /\A[a-z0-9][a-z0-9\-]*\z/i)
       end
     end
   end
